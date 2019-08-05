@@ -1,12 +1,30 @@
 import { observable, action } from 'mobx';
 import { createContext } from 'react';
-// import service from './service.config';
+import service from './service.config';
 
 class ArticleStore {
-  @observable count = 0;
+  @observable currentArticle = {
+    title: '',
+    slug: '',
+    body: '',
+    createdAt: '',
+    updatedAt: '',
+    tagList: [],
+    description: '',
+    favorited: false,
+    favoritesCount: 0,
+    author: {
+      username: '',
+      bio: '',
+      image: '',
+      following: false,
+    }
+  };
   
-  @action addCount() {
-    this.count++;
+  @action async getCurrentArticle(slug) {
+    const data = await service.get(`/articles/${slug}`);
+    console.table(data.article)
+    this.currentArticle = data.article;
   };
 }
 

@@ -1,29 +1,28 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Header = props => {
 
   return (
     <nav className="navbar navbar-light">
       <div className="container">
-        <a className="navbar-brand" href="index.html">conduit</a>
+        <Link className="navbar-brand" to="/">conduit</Link>
         <ul className="nav navbar-nav pull-xs-right">
           <li className="nav-item">
-            {/* Add "active" class when you're on that page" */}
-            <a className="nav-link active" href="">Home</a>
+            <a className="nav-link active" href="./">Home</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="">
+            <a className="nav-link" href="./">
               <i className="ion-compose"></i>&nbsp;New Post
             </a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="">
+            <a className="nav-link" href="./">
               <i className="ion-gear-a"></i>&nbsp;Settings
             </a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="">Sign up</a>
+            <a className="nav-link" href="./">Sign up</a>
           </li>
         </ul>
       </div>

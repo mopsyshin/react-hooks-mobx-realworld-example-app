@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 const CommentForm = props => {
   return (
@@ -13,6 +13,7 @@ const CommentForm = props => {
       <div className="card-footer">
         <img
           src="http://i.imgur.com/Qr71crq.jpg"
+          alt="author profile"
           className="comment-author-img"
         />
         <button className="btn btn-sm btn-primary">Post Comment</button>

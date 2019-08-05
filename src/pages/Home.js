@@ -13,7 +13,7 @@ const Home = observer(props => {
 
   const articleList = () => feedStore.articleList.map( (article, index) => {
     return <ArticlePreview data={article} key={index} />;
-  })
+  });
 
   return (
     <div className="home-page">

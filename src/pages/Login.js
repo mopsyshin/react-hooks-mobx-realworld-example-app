@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React from "react";
 
 const Login = props => {
   return (
@@ -9,7 +8,7 @@ const Login = props => {
           <div className="col-md-6 offset-md-3 col-xs-12">
             <h1 className="text-xs-center">Sign up</h1>
             <p className="text-xs-center">
-              <a href="">Have an account?</a>
+              <a href="./">Have an account?</a>
             </p>
             <ul className="error-messages">
               <li>That email is already taken</li>

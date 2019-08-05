@@ -1,4 +1,5 @@
 import React from "react";
+import moment from "moment";
 
 const ArticleMeta = props => {
   const actionButtons = () => (
@@ -18,15 +19,15 @@ const ArticleMeta = props => {
   return (
     <div className="article-meta">
       <a href="./">
-        <img src="http://i.imgur.com/Qr71crq.jpg" alt="author profile" />
+        <img src={props.author.image} alt={props.author.username} />
       </a>
       <div className="info">
         <a href="./" className="author">
-          Eric Simons
+          {props.author.username}
         </a>
-        <span className="date">January 20th</span>
+        <span className="date">{moment(props.createdAt).fromNow()}</span>
       </div>
-      {props.needAction ? actionButtons() : null }
+      {props.needAction ? actionButtons() : null}
     </div>
   );
 };

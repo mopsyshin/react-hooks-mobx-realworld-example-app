@@ -1,45 +1,54 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
 import { observer } from "mobx-react-lite";
 import ArticleMeta from "components/article/ArticleMeta";
 import CommentCard from "components/comment/CommentCard";
 import CommentForm from "components/comment/CommentForm";
+import { ArticleStore } from "stores/index";
 
-const Article = observer( props => {
+const Article = observer(props => {
+  const articleStore = useContext(ArticleStore);
+  const article = articleStore.currentArticle;
+
+  useEffect(() => {
+    const slug = props.match.params.slug;
+    articleStore.getCurrentArticle(slug);
+  }, []);
+
   return (
     <div className="article-page">
       <div className="banner">
         <div className="container">
-          <h1>How to build webapps that scale</h1>
+          <h1>{article.title}</h1>
 
-          <ArticleMeta needAction/>
+          <ArticleMeta
+            needAction
+            author={article.author}
+            createdAt={article.createdAt}
+          />
         </div>
       </div>
 
       <div className="container page">
         <div className="row article-content">
-          <div className="col-md-12">
-            <p>
-              Web development technologies have evolved at an incredible clip
-              over the past few years.
-            </p>
-            <h2 id="introducing-ionic">Introducing RealWorld.</h2>
-            <p>It's a great solution for learning how other frameworks work.</p>
-          </div>
+          <div className="col-md-12">{article.body}</div>
         </div>
 
         <hr />
 
         <div className="article-actions">
-          <ArticleMeta needAction/>
+          <ArticleMeta
+            needAction
+            author={article.author}
+            createdAt={article.createdAt}
+          />
         </div>
 
         <div className="row">
           <div className="col-xs-12 col-md-8 offset-md-2">
-            <CommentForm/>
+            <CommentForm />
 
-            <CommentCard/>
-            <CommentCard/>
-
+            <CommentCard />
+            <CommentCard />
           </div>
         </div>
       </div>
