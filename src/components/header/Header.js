@@ -4,26 +4,26 @@ import styled from 'styled-components';
 const Header = props => {
 
   return (
-    <nav class="navbar navbar-light">
-      <div class="container">
-        <a class="navbar-brand" href="index.html">conduit</a>
-        <ul class="nav navbar-nav pull-xs-right">
-          <li class="nav-item">
+    <nav className="navbar navbar-light">
+      <div className="container">
+        <a className="navbar-brand" href="index.html">conduit</a>
+        <ul className="nav navbar-nav pull-xs-right">
+          <li className="nav-item">
             {/* Add "active" class when you're on that page" */}
-            <a class="nav-link active" href="">Home</a>
+            <a className="nav-link active" href="">Home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="">
-              <i class="ion-compose"></i>&nbsp;New Post
+          <li className="nav-item">
+            <a className="nav-link" href="">
+              <i className="ion-compose"></i>&nbsp;New Post
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="">
-              <i class="ion-gear-a"></i>&nbsp;Settings
+          <li className="nav-item">
+            <a className="nav-link" href="">
+              <i className="ion-gear-a"></i>&nbsp;Settings
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="">Sign up</a>
+          <li className="nav-item">
+            <a className="nav-link" href="">Sign up</a>
           </li>
         </ul>
       </div>

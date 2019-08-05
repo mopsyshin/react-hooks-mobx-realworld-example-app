@@ -1,114 +1,55 @@
-import React, { useContext, useEffect } from "react";
-import { observer } from 'mobx-react-lite';
-import { FeedStore } from 'stores';
+import React, { useEffect, useContext } from "react";
+import { observer } from "mobx-react-lite";
+import { FeedStore } from "stores";
+import ArticlePreview from "components/article/ArticlePreview";
+import TagItem from "components/tag-item/TagItem";
 
-const Home = observer( props => {
-  const feedStore = useContext(FeedStore)
+const Home = observer(props => {
+  const feedStore = useContext(FeedStore);
+
+  useEffect(() => {
+    feedStore.getArticleList();
+  }, []);
+
+  const articleList = () => feedStore.articleList.map( (article, index) => {
+    return <ArticlePreview data={article} key={index} />;
+  })
 
   return (
-    <div class="home-page">
-      <div class="banner">
-        <div class="container">
-          <h1 class="logo-font">conduit</h1>
+    <div className="home-page">
+      <div className="banner">
+        <div className="container">
+          <h1 className="logo-font">conduit</h1>
           <p>A place to share your knowledge.</p>
         </div>
       </div>
 
-      <div class="container page">
-        <div class="row">
-          <div class="col-md-9">
-            <div class="feed-toggle">
-              <ul class="nav nav-pills outline-active">
-                <li class="nav-item">
-                  <a class="nav-link disabled" href="">
+      <div className="container page">
+        <div className="row">
+          <div className="col-md-9">
+            <div className="feed-toggle">
+              <ul className="nav nav-pills outline-active">
+                <li className="nav-item">
+                  <a className="nav-link disabled" href="./">
                     Your Feed
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link active" href="">
+                <li className="nav-item">
+                  <a className="nav-link active" href="./">
                     Global Feed
                   </a>
                 </li>
               </ul>
             </div>
-
-            <div class="article-preview">
-              <div class="article-meta">
-                <a href="profile.html">
-                  <img src="http://i.imgur.com/Qr71crq.jpg" />
-                </a>
-                <div class="info">
-                  <a href="" class="author">
-                    Eric Simons
-                  </a>
-                  <span class="date">January 20th</span>
-                </div>
-                <button class="btn btn-outline-primary btn-sm pull-xs-right">
-                  <i class="ion-heart" /> 29
-                </button>
-              </div>
-              <a href="" class="preview-link">
-                <h1>How to build webapps that scale</h1>
-                <p>This is the description for the post.</p>
-                <span>Read more...</span>
-              </a>
-            </div>
-
-            <div class="article-preview">
-              <div class="article-meta">
-                <a href="profile.html">
-                  <img src="http://i.imgur.com/N4VcUeJ.jpg" />
-                </a>
-                <div class="info">
-                  <a href="" class="author">
-                    Albert Pai
-                  </a>
-                  <span class="date">January 20th</span>
-                </div>
-                <button class="btn btn-outline-primary btn-sm pull-xs-right">
-                  <i class="ion-heart" /> 32
-                </button>
-              </div>
-              <a href="" class="preview-link">
-                <h1>
-                  The song you won't ever stop singing. No matter how hard you
-                  try.
-                </h1>
-                <p>This is the description for the post.</p>
-                <span>Read more...</span>
-              </a>
-            </div>
+            {articleList()}
           </div>
 
-          <div class="col-md-3">
-            <div class="sidebar">
+          <div className="col-md-3">
+            <div className="sidebar">
               <p>Popular Tags</p>
 
-              <div class="tag-list">
-                <a href="" class="tag-pill tag-default">
-                  programming
-                </a>
-                <a href="" class="tag-pill tag-default">
-                  javascript
-                </a>
-                <a href="" class="tag-pill tag-default">
-                  emberjs
-                </a>
-                <a href="" class="tag-pill tag-default">
-                  angularjs
-                </a>
-                <a href="" class="tag-pill tag-default">
-                  react
-                </a>
-                <a href="" class="tag-pill tag-default">
-                  mean
-                </a>
-                <a href="" class="tag-pill tag-default">
-                  node
-                </a>
-                <a href="" class="tag-pill tag-default">
-                  rails
-                </a>
+              <div className="tag-list">
+                <TagItem />
               </div>
             </div>
           </div>

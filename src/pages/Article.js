@@ -1,39 +1,23 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React from "react";
+import { observer } from "mobx-react-lite";
+import ArticleMeta from "components/article/ArticleMeta";
+import CommentCard from "components/comment/CommentCard";
+import CommentForm from "components/comment/CommentForm";
 
-const Article = props => {
+const Article = observer( props => {
   return (
-    <div class="article-page">
-      <div class="banner">
-        <div class="container">
+    <div className="article-page">
+      <div className="banner">
+        <div className="container">
           <h1>How to build webapps that scale</h1>
 
-          <div class="article-meta">
-            <a href="">
-              <img src="http://i.imgur.com/Qr71crq.jpg" />
-            </a>
-            <div class="info">
-              <a href="" class="author">
-                Eric Simons
-              </a>
-              <span class="date">January 20th</span>
-            </div>
-            <button class="btn btn-sm btn-outline-secondary">
-              <i class="ion-plus-round" />
-              &nbsp; Follow Eric Simons <span class="counter">(10)</span>
-            </button>
-            &nbsp;&nbsp;
-            <button class="btn btn-sm btn-outline-primary">
-              <i class="ion-heart" />
-              &nbsp; Favorite Post <span class="counter">(29)</span>
-            </button>
-          </div>
+          <ArticleMeta needAction/>
         </div>
       </div>
 
-      <div class="container page">
-        <div class="row article-content">
-          <div class="col-md-12">
+      <div className="container page">
+        <div className="row article-content">
+          <div className="col-md-12">
             <p>
               Web development technologies have evolved at an incredible clip
               over the past few years.
@@ -45,100 +29,22 @@ const Article = props => {
 
         <hr />
 
-        <div class="article-actions">
-          <div class="article-meta">
-            <a href="profile.html">
-              <img src="http://i.imgur.com/Qr71crq.jpg" />
-            </a>
-            <div class="info">
-              <a href="" class="author">
-                Eric Simons
-              </a>
-              <span class="date">January 20th</span>
-            </div>
-            <button class="btn btn-sm btn-outline-secondary">
-              <i class="ion-plus-round" />
-              &nbsp; Follow Eric Simons <span class="counter">(10)</span>
-            </button>
-            &nbsp;
-            <button class="btn btn-sm btn-outline-primary">
-              <i class="ion-heart" />
-              &nbsp; Favorite Post <span class="counter">(29)</span>
-            </button>
-          </div>
+        <div className="article-actions">
+          <ArticleMeta needAction/>
         </div>
 
-        <div class="row">
-          <div class="col-xs-12 col-md-8 offset-md-2">
-            <form class="card comment-form">
-              <div class="card-block">
-                <textarea
-                  class="form-control"
-                  placeholder="Write a comment..."
-                  rows="3"
-                />
-              </div>
-              <div class="card-footer">
-                <img
-                  src="http://i.imgur.com/Qr71crq.jpg"
-                  class="comment-author-img"
-                />
-                <button class="btn btn-sm btn-primary">Post Comment</button>
-              </div>
-            </form>
+        <div className="row">
+          <div className="col-xs-12 col-md-8 offset-md-2">
+            <CommentForm/>
 
-            <div class="card">
-              <div class="card-block">
-                <p class="card-text">
-                  With supporting text below as a natural lead-in to additional
-                  content.
-                </p>
-              </div>
-              <div class="card-footer">
-                <a href="" class="comment-author">
-                  <img
-                    src="http://i.imgur.com/Qr71crq.jpg"
-                    class="comment-author-img"
-                  />
-                </a>
-                &nbsp;
-                <a href="" class="comment-author">
-                  Jacob Schmidt
-                </a>
-                <span class="date-posted">Dec 29th</span>
-              </div>
-            </div>
+            <CommentCard/>
+            <CommentCard/>
 
-            <div class="card">
-              <div class="card-block">
-                <p class="card-text">
-                  With supporting text below as a natural lead-in to additional
-                  content.
-                </p>
-              </div>
-              <div class="card-footer">
-                <a href="" class="comment-author">
-                  <img
-                    src="http://i.imgur.com/Qr71crq.jpg"
-                    class="comment-author-img"
-                  />
-                </a>
-                &nbsp;
-                <a href="" class="comment-author">
-                  Jacob Schmidt
-                </a>
-                <span class="date-posted">Dec 29th</span>
-                <span class="mod-options">
-                  <i class="ion-edit" />
-                  <i class="ion-trash-a" />
-                </span>
-              </div>
-            </div>
           </div>
         </div>
       </div>
     </div>
   );
-};
+});
 
 export default Article;

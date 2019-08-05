@@ -22,7 +22,8 @@ const errorHandler = statusCode => {
 export default {
   get: async path => {
     try {
-      return await axios.get(`${API_BASE_URL}${path}`);
+      const result = await axios.get(`${API_BASE_URL}${path}`);
+      return result.data;
     } catch (err) {
       errorHandler(err.statusCode);
     }

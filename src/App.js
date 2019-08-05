@@ -11,7 +11,7 @@ const App = () => {
       <GnbHeader/>
       <Route exact path="/" component={Home} />
       <Route path="/settings" component={Settings} />
-      <Route path="/article" component={Article} />
+      <Route path="/article/:slug" component={Article} />
       <Route path="/create-article" component={CreateArticle} />
       <Route path="/edit-article" component={EditArticle} />
       <Route path="/register" component={Register} />
