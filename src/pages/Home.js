@@ -1,7 +1,10 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React, { useContext, useEffect } from "react";
+import { observer } from 'mobx-react-lite';
+import { FeedStore } from 'stores';
 
-const Home = props => {
+const Home = observer( props => {
+  const feedStore = useContext(FeedStore)
+
   return (
     <div class="home-page">
       <div class="banner">
@@ -113,6 +116,6 @@ const Home = props => {
       </div>
     </div>
   );
-};
+});
 
 export default Home;
