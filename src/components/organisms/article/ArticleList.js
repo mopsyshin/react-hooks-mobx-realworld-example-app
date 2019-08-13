@@ -11,7 +11,7 @@ const ArticleList = observer(props => {
       if (articleStore.articleList.length > 0) {
         return articleStore.articleList.map((article, index) => {
           return (
-            <ArticlePreview data={article} key={index} />
+            <ArticlePreview article={article} key={index} />
           )
         })
       }

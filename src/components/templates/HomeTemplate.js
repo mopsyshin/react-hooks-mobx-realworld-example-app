@@ -4,7 +4,6 @@ import PopularTags from 'components/organisms/popular-tags/PopularTags';
 import TabMenu from 'components/organisms/tab-menu/TabMenu';
 
 const HomeTemplate = props => {
-
   return (
     <div className="home-page">
       <div className="banner">

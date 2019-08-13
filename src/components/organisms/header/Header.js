@@ -11,22 +11,22 @@ const Header = observer(props => {
     {
       navItemName: 'Home',
       icon: null,
-      path: './',
+      path: '/',
     },
     {
       navItemName: 'New Post',
       icon: 'ion-compose',
-      path: './create-article',
+      path: '/create-article',
     },
     {
       navItemName: 'Settings',
       icon: 'ion-gear-a',
-      path: './settings',
+      path: '/settings',
     },
     {
       navItemName: userStore.currentUser ? userStore.currentUser.username : '',
       icon: null,
-      path: './',
+      path: `/profile/${userStore.currentUser ? userStore.currentUser.username : ''}`,
     }
   ]
 
@@ -34,17 +34,17 @@ const Header = observer(props => {
     {
       navItemName: 'Home',
       icon: null,
-      path: './',
+      path: '/',
     },
     {
       navItemName: 'Login',
       icon: null,
-      path: './login',
+      path: '/login',
     },
     {
       navItemName: 'Sign up',
       icon: null,
-      path: './register',
+      path: '/register',
     }
   ]
 

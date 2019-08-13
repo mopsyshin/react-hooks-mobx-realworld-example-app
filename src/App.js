@@ -23,7 +23,7 @@ const App = () => {
       <Route path="/edit-article" component={EditArticle} />
       <Route path="/register" component={Register} />
       <Route path="/login" component={Login} />
-      <Route path="/profile" component={Profile} />
+      <Route path="/profile/:username" component={Profile} />
       <Route path="/" component={GnbFooter}/>
     </div>
   )

@@ -48,9 +48,11 @@ class ArticleStore {
 
   @action
   async getFeed(params) {
+    this.articleListIsLoaded = false;
     const result = await Service.authGet(`${this.URL}/feed`, { params });
     if (result) {
       this.articleList = result.data.articles.map(article => new ArticleModel(article));
+      this.articleListIsLoaded = true;
     }
   };
 
