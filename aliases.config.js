@@ -6,6 +6,7 @@ const aliases = {
   'pages': 'src/pages',
   'styles': 'src/styles',
   'stores': 'src/stores',
+  'models': 'src/models',
   'src': 'src',
 }
 

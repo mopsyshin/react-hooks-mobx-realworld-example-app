@@ -1,49 +1,64 @@
-import React from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { observer } from "mobx-react-lite";
+import LoginTemplate from "components/templates/LoginTemplate";
+import { UserStore, CommonStore } from "stores/index";
 
-const Login = props => {
+const Login = observer(props => {
+  const userStore = useContext(UserStore);
+  const commonStore = useContext(CommonStore);
+
+  const [editable, setEditable] = useState({
+    email: '',
+    password: '',
+  })
+
+  useEffect(() => {
+    return commonStore.clearErrorList();
+  }, [])
+
+  const updateEditable = (key, value) => {
+    setEditable({
+      ...editable,
+      [key]: value
+    });
+  };
+
+  const submit = async e => {
+    e.preventDefault();
+    try {
+      await userStore.login({user: editable});
+      props.history.push('./');
+    }
+    catch (err) {
+      commonStore.setErrorList(err);
+    }
+  };
+
+  const forms = [
+    {
+      type: "email",
+      placeholder: "Email",
+      value: editable.email,
+      onChange: e => {
+        updateEditable("email", e.target.value);
+      }
+    },
+    {
+      type: "password",
+      placeholder: "Password",
+      value: editable.password,
+      onChange: e => {
+        updateEditable("password", e.target.value);
+      }
+    }
+  ];
+
   return (
-    <div className="auth-page">
-      <div className="container page">
-        <div className="row">
-          <div className="col-md-6 offset-md-3 col-xs-12">
-            <h1 className="text-xs-center">Sign up</h1>
-            <p className="text-xs-center">
-              <a href="./">Have an account?</a>
-            </p>
-            <ul className="error-messages">
-              <li>That email is already taken</li>
-            </ul>
-            <form>
-              <fieldset className="form-group">
-                <input
-                  className="form-control form-control-lg"
-                  type="text"
-                  placeholder="Your Name"
-                />
-              </fieldset>
-              <fieldset className="form-group">
-                <input
-                  className="form-control form-control-lg"
-                  type="text"
-                  placeholder="Email"
-                />
-              </fieldset>
-              <fieldset className="form-group">
-                <input
-                  className="form-control form-control-lg"
-                  type="password"
-                  placeholder="Password"
-                />
-              </fieldset>
-              <button className="btn btn-lg btn-primary pull-xs-right">
-                Sign up
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
+    <LoginTemplate
+      forms={forms}
+      updateEditable={updateEditable}
+      submit={submit}/>
   );
-};
+});
 
 export default Login;

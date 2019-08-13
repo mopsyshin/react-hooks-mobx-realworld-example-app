@@ -1,14 +1,21 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
 import { Route } from 'react-router-dom';
 import { Home, Article, CreateArticle, EditArticle, Register, Login, Profile, Settings } from 'pages';
-import GnbHeader from 'components/header/Header';
-import GnbFooter from 'components/footer/Footer';
+import GnbHeader from 'components/organisms/header/Header';
+import GnbFooter from 'components/organisms/footer/Footer';
 import "./App.css";
+import { UserStore } from "stores/index";
 
 const App = () => {
+  const userStore = useContext(UserStore);
+
+  useEffect(() => {
+    userStore.getCurrentUser();
+  }, [])
+
   return (
     <div>
-      <GnbHeader/>
+      <Route path="/" component={GnbHeader}/>
       <Route exact path="/" component={Home} />
       <Route path="/settings" component={Settings} />
       <Route path="/articles/:slug" component={Article} />
@@ -17,7 +24,7 @@ const App = () => {
       <Route path="/register" component={Register} />
       <Route path="/login" component={Login} />
       <Route path="/profile" component={Profile} />
-      <GnbFooter/>
+      <Route path="/" component={GnbFooter}/>
     </div>
   )
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import ArticleMeta from "./ArticleMeta";
-import TagItem from "components/tag-item/TagItem";
+import TagItem from "components/molecules/tag-item/TagItem";
 
 const ArticlePreview = props => {
   const tagList = () =>

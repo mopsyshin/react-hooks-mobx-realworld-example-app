@@ -1,31 +1,63 @@
 import { observable, action } from 'mobx';
 import { createContext } from 'react';
-import service from './service.config';
+import { ArticleModel } from 'src/Models';
+import Service from '../config/service.config'
 
 class ArticleStore {
-  @observable currentArticle = {
-    title: '',
-    slug: '',
-    body: '',
-    createdAt: '',
-    updatedAt: '',
-    tagList: [],
-    description: '',
-    favorited: false,
-    favoritesCount: 0,
-    author: {
-      username: '',
-      bio: '',
-      image: '',
-      following: false,
-    }
-  };
+  URL = "/articles";
+
+  // Managing Current Article
+  @observable
+  currentArticle = new ArticleModel();
+
+  @observable
+  articleIsLoaded = false;
   
   @action async getCurrentArticle(slug) {
-    const data = await service.get(`/articles/${slug}`);
-    console.table(data.article)
-    this.currentArticle = data.article;
+    const { data } = await Service.get(`${this.URL}/${slug}`);
+    this.currentArticle = new ArticleModel(data.article);
   };
+
+  @action
+  async createArticle(article) {
+    const { data } = await Service.post(this.URL, { article });
+    this.currentArticle = new ArticleModel(data.article);
+  }
+
+  @action
+  clearArticle() {
+    this.currentArticle = new ArticleModel();
+  }
+
+  // Managing Article List
+  @observable
+  articleList = [];
+
+  @observable
+  articleListIsLoaded = false;
+
+  @action
+  async getArticleList(params) {
+    this.articleListIsLoaded = false;
+    const result = await Service.get(this.URL, params);
+    if (result) {
+      this.articleList = result.data.articles.map(article => new ArticleModel(article));
+      this.articleListIsLoaded = true;
+    }
+  };
+
+  @action
+  async getFeed(params) {
+    const result = await Service.authGet(`${this.URL}/feed`, { params });
+    if (result) {
+      this.articleList = result.data.articles.map(article => new ArticleModel(article));
+    }
+  };
+
+  @action
+  clearArticleList() {
+    this.articleList = [];
+  }
 }
 
 export default createContext(new ArticleStore());

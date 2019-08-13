@@ -1,8 +1,8 @@
 import React, { useEffect, useContext } from "react";
 import { observer } from "mobx-react-lite";
-import ArticleMeta from "components/article/ArticleMeta";
-import CommentCard from "components/comment/CommentCard";
-import CommentForm from "components/comment/CommentForm";
+import ArticleMeta from "components/organisms/article/ArticleMeta";
+import CommentCard from "components/organisms/comment/CommentCard";
+import CommentForm from "components/organisms/comment/CommentForm";
 import { ArticleStore } from "stores/index";
 
 const Article = observer(props => {
@@ -12,6 +12,7 @@ const Article = observer(props => {
   useEffect(() => {
     const slug = props.match.params.slug;
     articleStore.getCurrentArticle(slug);
+    return articleStore.clearArticle();
   }, []);
 
   return (

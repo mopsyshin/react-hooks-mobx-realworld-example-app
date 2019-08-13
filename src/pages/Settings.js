@@ -1,60 +1,66 @@
-import React from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { observer } from "mobx-react-lite";
+import SettingTemplate from "components/templates/SettingTemplate";
+import { UserStore, CommonStore } from "stores/index";
 
-const Settings = props => {
+const Settings = observer(props => {
+  const userStore = useContext(UserStore);
+  const commonStore = useContext(CommonStore);
+
+  const [editable, setEditable] = useState({
+    username: "",
+    image: "",
+    bio: "",
+    email: "",
+    password: ""
+  });
+
+  const updateEditable = (key, value) => {
+    setEditable({
+      ...editable,
+      [key]: value
+    });
+  };
+
+  const submit = async e => {
+    e.preventDefault();
+    try {
+      await userStore.updateUser({user: editable});
+      props.history.push('./');
+    }
+    catch (err) {
+      commonStore.setErrorList(err);
+    }
+  }
+
+  const logout = () => {
+    userStore.logout();
+    props.history.push('./');
+  }
+
+  useEffect(() => {
+    async function fetchData() {
+      await userStore.getCurrentUser();
+      setEditable({
+        username: userStore.currentUser.username || '',
+        image: userStore.currentUser.image || '',
+        bio: userStore.currentUser.bio || '',
+        email: userStore.currentUser.email || '',
+        password: '',
+      });
+    }
+    fetchData();
+    return commonStore.clearErrorList();
+  }, []);
+
   return (
-    <div className="settings-page">
-      <div className="container page">
-        <div className="row">
-          <div className="col-md-6 offset-md-3 col-xs-12">
-            <h1 className="text-xs-center">Your Settings</h1>
-
-            <form>
-              <fieldset>
-                <fieldset className="form-group">
-                  <input
-                    className="form-control"
-                    type="text"
-                    placeholder="URL of profile picture"
-                  />
-                </fieldset>
-                <fieldset className="form-group">
-                  <input
-                    className="form-control form-control-lg"
-                    type="text"
-                    placeholder="Your Name"
-                  />
-                </fieldset>
-                <fieldset className="form-group">
-                  <textarea
-                    className="form-control form-control-lg"
-                    rows="8"
-                    placeholder="Short bio about you"
-                  />
-                </fieldset>
-                <fieldset className="form-group">
-                  <input
-                    className="form-control form-control-lg"
-                    type="text"
-                    placeholder="Email"
-                  />
-                </fieldset>
-                <fieldset className="form-group">
-                  <input
-                    className="form-control form-control-lg"
-                    type="password"
-                    placeholder="Password"
-                  />
-                </fieldset>
-                <button className="btn btn-lg btn-primary pull-xs-right">
-                  Update Settings
-                </button>
-              </fieldset>
-            </form>
-          </div>
-        </div>
-      </div>
+    <div>
+      <SettingTemplate editable={editable}
+                       updateEditable={updateEditable}
+                       submit={submit}
+                       logout={logout}/>
     </div>
   );
-};
+});
 
 export default Settings;

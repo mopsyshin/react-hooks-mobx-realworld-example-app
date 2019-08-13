@@ -1,5 +1,5 @@
 import React from "react";
-import ArticlePreview from "components/article/ArticlePreview";
+import ArticlePreview from "components/organisms/article/ArticlePreview";
 
 const Profile = props => {
   return (

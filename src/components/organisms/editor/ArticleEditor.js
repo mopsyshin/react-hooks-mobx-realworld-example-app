@@ -1,4 +1,4 @@
-import React from "react";
+import React from "components/organisms/editor/react";
 
 const ArticleEditor = props => {
   return (
