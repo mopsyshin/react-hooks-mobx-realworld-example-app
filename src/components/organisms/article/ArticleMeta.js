@@ -1,8 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import moment from "moment";
-import FavoriteButton from "components/molecules/buttons/FavoriteButton";
-import FollowButton from "components/molecules/buttons/FollowButton";
 import BaseButton from "components/molecules/buttons/BaseButton";
 
 const ArticleMeta = props => {
@@ -20,6 +18,7 @@ const ArticleMeta = props => {
             buttonClass="pull-xs-right btn-outline-primary"
           >
             <i className="ion-heart" />
+            <span className="counter">&nbsp;{props.article.favoritesCount}</span>
           </BaseButton>
         );
       case "article":

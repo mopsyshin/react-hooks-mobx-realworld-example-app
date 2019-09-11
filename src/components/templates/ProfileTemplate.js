@@ -3,6 +3,23 @@ import ArticleList from 'components/organisms/article/ArticleList';
 import TabMenu from 'components/organisms/tab-menu/TabMenu';
 
 const ProfileTemplate = props => {
+  const renderActionButton = () => {
+    if (props.isMyProfile) {
+      return (
+        <button className="btn btn-sm btn-outline-secondary action-btn">
+          <i className="ion-gear-a" />
+            &nbsp; Edit Profile Settings
+        </button>
+      )
+    } else {
+      return (
+        <button className="btn btn-sm btn-outline-secondary action-btn">
+          <i className="ion-plus-round" />
+            &nbsp; Follow {props.profile.username}
+        </button>
+      )
+    }
+  }
 
   return (
     <div className="profile-page">
@@ -11,7 +28,7 @@ const ProfileTemplate = props => {
           <div className="row">
             <div className="col-xs-12 col-md-10 offset-md-1">
               <img
-                src="http://i.imgur.com/Qr71crq.jpg"
+                src={props.profile.image}
                 alt="author profile"
                 className="user-img"
               />
@@ -19,10 +36,7 @@ const ProfileTemplate = props => {
               <p>
                 {props.profile.bio}
               </p>
-              <button className="btn btn-sm btn-outline-secondary action-btn">
-                <i className="ion-plus-round" />
-                &nbsp; Follow {props.profile.username}
-              </button>
+              {renderActionButton()}
             </div>
           </div>
         </div>
@@ -31,7 +45,9 @@ const ProfileTemplate = props => {
       <div className="container">
         <div className="row">
           <div className="col-xs-12 col-md-10 offset-md-1">
-            <TabMenu />
+            <div className="articles-toggle">
+              <TabMenu />
+            </div>
             <ArticleList />
           </div>
         </div>

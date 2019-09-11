@@ -16,7 +16,9 @@ const HomeTemplate = props => {
       <div className="container page">
         <div className="row">
           <div className="col-md-9">
-            <TabMenu />
+            <div className="feed-toggle">
+              <TabMenu />
+            </div>
             <ArticleList />
           </div>
 

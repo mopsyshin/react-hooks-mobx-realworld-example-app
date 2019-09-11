@@ -13,15 +13,28 @@ class ArticleStore {
   @observable
   articleIsLoaded = false;
   
-  @action async getCurrentArticle(slug) {
+  @action
+  async getCurrentArticle(slug) {
     const { data } = await Service.get(`${this.URL}/${slug}`);
     this.currentArticle = new ArticleModel(data.article);
   };
 
   @action
-  async createArticle(article) {
-    const { data } = await Service.post(this.URL, { article });
+  async updateArticle(slug, article) {
+    const { data } = await Service.authPut(`${this.URL}/${slug}`, article)
     this.currentArticle = new ArticleModel(data.article);
+  }
+
+  @action
+  async createArticle(article) {
+    const { data } = await Service.authPost(this.URL, { article });
+    this.currentArticle = new ArticleModel(data.article);
+  }
+
+  @action
+  async deleteArticle(slug) {
+    await Service.authDelete(`${this.URL}/${slug}`);
+    this.currentArticle = new ArticleModel();
   }
 
   @action

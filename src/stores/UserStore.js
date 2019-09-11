@@ -9,7 +9,7 @@ class UserStore {
   URL = '/users';
 
   @observable
-  currentUser = null;
+  currentUser = new UserModel();
 
   @computed
   get loginStatus() {
